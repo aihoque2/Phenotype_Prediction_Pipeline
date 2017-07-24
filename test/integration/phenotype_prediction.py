@@ -1,13 +1,9 @@
 """module for defining a class for running phenotype prediction jobs"""
-from math import isnan
 import os
-from zipfile import ZipFile, ZIP_DEFLATED
+import time
+import sys
 
 import requests
-import time
-import pandas as pd
-import yaml
-import sys
 
 """
 THESE ARE THE LIBRARIES THAT DON'T NEEED TO BE USED AT THE MOMENT (BUT MIGHT BE NEEDED LATER ON)

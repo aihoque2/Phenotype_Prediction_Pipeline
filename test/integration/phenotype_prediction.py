@@ -26,7 +26,7 @@ class PhenotypePredictionJob():
 		pass	
 
 
-	def runJobs(self):
+	def runJob(self, inputYML):
 		self.cleanup()
                 run_data = {
                         "schedule": "R1//P3M",
@@ -37,7 +37,7 @@ class PhenotypePredictionJob():
                                 "image": "knowengdev/phenotype_prediction_pipeline:06_02_2017",
                                 "volumes": [{"containerPath": "/mnt/knowdev/aihoque2", "hostPath": "/mnt/knowdev/aihoque2", "mode": "RW"}]
                         },
-			"command": "cd /home/test && make env_setup && python3 ../src/phenotype_prediction.py -run_dir ./run_dir -run_file BENCHMARK_2_ElasticNet.yml && cp -r ./run_dir/results/* /mnt/knowdev/aihoque2/test_results && chmod 770 /mnt/knowdev/aihoque2/test_results/*",
+			"command": "cd /home/test && make env_setup && python3 ../src/phenotype_prediction.py -run_dir ./run_dir -run_file " + inputYML + " && cp -r ./run_dir/results/* /mnt/knowdev/aihoque2/test_results && chmod 770 /mnt/knowdev/aihoque2/test_results/*",
 
                         "retries": "1",
                         "cpus": "1",
@@ -78,4 +78,6 @@ class PhenotypePredictionJob():
 
 
 if __name__ == '__main__':
-	PhenotypePredictionJob().runJobs()
+	PhenotypePredictionJob().runJob('test1.yml')
+	PhenotypePredictionJob().runJob('test2.yml')
+	PhenotypePredictionJob().runJob('test3.yml')
